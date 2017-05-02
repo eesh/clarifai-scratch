@@ -80,7 +80,7 @@
     }
 
     ext.initializeClarifai = function (apikey1, apikey2, callback) {
-      var clarifai = new Clarifai.App(apikey1, apikey2);
+      clarifai = new Clarifai.App(apikey1, apikey2);
       if (clarifai == undefined) {
         clarifaiLoaded = false;
       } else {
@@ -107,15 +107,26 @@
         callback();
         return;
       }
-      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+      // clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+      //   function(response) {
+      //     console.log(response);
+      //     // if(response.status.code == 10000) {
+      //     //   processResponse(response);
+      //     // } else {
+      //     //   console.log(response);
+      //     //   callback();
+      //     // }
+      //     callback();
+      //   },
+      //   function(err) {
+      //     console.error(err);
+      //     callback();
+      //   }
+      // );
+
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg').then(
         function(response) {
           console.log(response);
-          // if(response.status.code == 10000) {
-          //   processResponse(response);
-          // } else {
-          //   console.log(response);
-          //   callback();
-          // }
           callback();
         },
         function(err) {
