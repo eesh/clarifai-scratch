@@ -25,7 +25,7 @@
       videoElement.id = "camera-stream";
       hidden_canvas = document.createElement('canvas');
       hidden_canvas.id = "imageCanvas";
-      console.log("Getting UserMedia");
+
       navigator.getUserMedia(
           // Options
           {
@@ -33,48 +33,34 @@
           },
           // Success Callback
           function(stream){
-            console.log("starting stream");
             // Create an object URL for the video stream and
             // set it as src of our HTLM video element.
             videoElement.src = window.URL.createObjectURL(stream);
-
-            console.log("Playing stream");
             // Play the video element to show the stream to the user.
             videoElement.play();
-            console.log("Initialized camera");
-
           },
           // Error Callback
           function(err){
-
               // Most common errors are PermissionDenied and DevicesNotFound.
               console.error(err);
-
           }
       );
     }
 
     function takeSnapshot(){
-
-        console.log("take snapshot routine");
         // Get the exact size of the video element.
         width = videoElement.videoWidth;
         height = videoElement.videoHeight;
-        console.log("wxh",width, height);
+
         // Context object for working with the canvas.
         context = hidden_canvas.getContext('2d');
-        console.log("context");
-        console.log(context);
 
         // Set the canvas to the same dimensions as the video.
         hidden_canvas.width = width;
         hidden_canvas.height = height;
 
-        console.log("canvas dims set");
-
         // Draw a copy of the current frame from the video on the canvas.
         context.drawImage(videoElement, 0, 0, width, height);
-        console.log("image drawn");
 
         // Get an image dataURL from the canvas.
         var imageDataURL = hidden_canvas.toDataURL('image/png');
@@ -94,48 +80,44 @@
     }
 
     ext.performSearch = function(image, callback) {
-      console.log("Taking snap");
-      console.log(takeSnapshot());
-      console.log("post snap");
-      callback();
-      // console.log(image);
-      // if(image == undefined) {
-      //   if(imageCanvas != undefined) {
-      //     image = takeSnapshot();
-      //   } else callback();
-      // } else {
-      //   if (image.substring(0,4) != "http") {
-      //     image = { base64 : image };
-      //   }
-      // }
-      // if(clarifaiLoaded == false) {
-      //   console.log("Clarifai not loaded");
-      //   callback();
-      //   return;
-      // }
-      // clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
-      //   function(response) {
-      //     console.log(response);
-      //     if(response.status.code == 10000) {
-      //       processResponse(response);
-      //     } else {
-      //       console.log(response);
-      //       callback();
-      //     }
-      //   },
-      //   function(err) {
-      //     console.error(err);
-      //     callback();
-      //   }
-      // );
-      //
-      // function processResponse(response) {
-      //   console.log("Processing response", response);
-      //   response.outputs[0].data.concepts.forEach(function(result) {
-      //     predictionResults.push(result.name);
-      //   });
-      //   callback();
-      // }
+      console.log(image);
+      if(image == undefined) {
+        if(imageCanvas != undefined) {
+          image = takeSnapshot();
+        } else callback();
+      } else {
+        if (image.substring(0,4) != "http") {
+          image = { base64 : image };
+        }
+      }
+      if(clarifaiLoaded == false) {
+        console.log("Clarifai not loaded");
+        callback();
+        return;
+      }
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+        function(response) {
+          console.log(response);
+          if(response.status.code == 10000) {
+            processResponse(response);
+          } else {
+            console.log(response);
+            callback();
+          }
+        },
+        function(err) {
+          console.error(err);
+          callback();
+        }
+      );
+
+      function processResponse(response) {
+        console.log("Processing response", response);
+        response.outputs[0].data.concepts.forEach(function(result) {
+          predictionResults.push(result.name);
+        });
+        callback();
+      }
     }
 
     ext.getResultsLength = function () {
