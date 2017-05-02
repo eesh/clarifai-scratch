@@ -56,20 +56,25 @@
 
     function takeSnapshot(){
 
+        console.log("take snapshot routine");
         // Get the exact size of the video element.
-        width = video.videoWidth,
-        height = video.videoHeight,
-
+        width = video.videoWidth;
+        height = video.videoHeight;
+        console.log("wxh",width, height);
         // Context object for working with the canvas.
         context = hidden_canvas.getContext('2d');
-
+        console.log("context");
+        console.log(context);
 
         // Set the canvas to the same dimensions as the video.
         hidden_canvas.width = width;
         hidden_canvas.height = height;
 
+        console.log("canvas dims set");
+
         // Draw a copy of the current frame from the video on the canvas.
         context.drawImage(video, 0, 0, width, height);
+        console.log("image drawn");
 
         // Get an image dataURL from the canvas.
         var imageDataURL = hidden_canvas.toDataURL('image/png');
@@ -89,7 +94,9 @@
     }
 
     ext.performSearch = function(image, callback) {
+      console.log("Taking snap");
       console.log(takeSnapshot());
+      console.log("post snap");
       callback();
       // console.log(image);
       // if(image == undefined) {
