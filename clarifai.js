@@ -20,10 +20,12 @@
     }
 
     function initializeCamera() {
+      console.log("Initializing camera");
       videoElement = document.createElement('video');
       videoElement.id = "camera-stream";
       hidden_canvas = document.createElement('canvas');
-      hidden_canvas.id = "imageCanvas"
+      hidden_canvas.id = "imageCanvas";
+      console.log("Getting UserMedia");
       navigator.getUserMedia(
           // Options
           {
@@ -31,13 +33,15 @@
           },
           // Success Callback
           function(stream){
+            console.log("starting stream");
+            // Create an object URL for the video stream and
+            // set it as src of our HTLM video element.
+            videoElement.src = window.URL.createObjectURL(stream);
 
-              // Create an object URL for the video stream and
-              // set it as src of our HTLM video element.
-              videoElement.src = window.URL.createObjectURL(stream);
-
-              // Play the video element to show the stream to the user.
-              videoElement.play();
+            console.log("Playing stream");
+            // Play the video element to show the stream to the user.
+            videoElement.play();
+            console.log("Initialized camera");
 
           },
           // Error Callback
@@ -75,7 +79,7 @@
         return imageDataURL;
     }
 
-    function initializeClarifai(apikey1, apikey2) {
+    ext.initializeClarifai = function (apikey1, apikey2) {
       var clarifai = new Clarifai.App(apikey1, apikey2);
       if (clarifai == undefined) {
         clarifaiLoaded = false;
@@ -83,6 +87,7 @@
         clarifaiLoaded = true;
         initializeCamera();
       }
+      console.log("Clarifai initialized")
     }
 
     function performSearch(image, callback) {
