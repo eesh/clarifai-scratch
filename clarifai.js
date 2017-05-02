@@ -107,27 +107,15 @@
         callback();
         return;
       }
-      // clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
-      //   function(response) {
-      //     console.log(response);
-      //     // if(response.status.code == 10000) {
-      //     //   processResponse(response);
-      //     // } else {
-      //     //   console.log(response);
-      //     //   callback();
-      //     // }
-      //     callback();
-      //   },
-      //   function(err) {
-      //     console.error(err);
-      //     callback();
-      //   }
-      // );
-
-      clarifai.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg').then(
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
         function(response) {
           console.log(response);
-          callback();
+          if(response.status.code == 10000) {
+            processResponse(response);
+          } else {
+            console.log(response);
+            callback();
+          }
         },
         function(err) {
           console.error(err);
@@ -137,7 +125,7 @@
 
       function processResponse(response) {
         console.log("Processing response", response);
-        response.outputs.data.concepts.forEach(function(result) {
+        response.outputs[0].data.concepts.forEach(function(result) {
           predictionResults.push(result.name);
         });
         callback();
