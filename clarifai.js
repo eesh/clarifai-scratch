@@ -109,12 +109,14 @@
       }
       clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
         function(response) {
-          if(response.status.code == 10000) {
-            processResponse(response);
-          } else {
-            console.log(response);
-            callback();
-          }
+          console.log(response);
+          // if(response.status.code == 10000) {
+          //   processResponse(response);
+          // } else {
+          //   console.log(response);
+          //   callback();
+          // }
+          callback();
         },
         function(err) {
           console.error(err);
