@@ -91,7 +91,8 @@
       callback();
     }
 
-    function performSearch(image, callback) {
+    ext.performSearch = function(image, callback) {
+      console.log(image);
       if(image == undefined) {
         if(imageCanvas != undefined) {
           image = takeSnapshot();
@@ -103,6 +104,7 @@
       }
       if(clarifaiLoaded == false) {
         console.log("Clarifai not loaded");
+        callback();
         return;
       }
       clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
@@ -111,25 +113,29 @@
             processResponse(response);
           } else {
             console.log(response);
+            callback();
           }
         },
         function(err) {
           console.error(err);
+          callback();
         }
       );
 
       function processResponse(response) {
+        console.log("Processing response", response);
         response.outputs.data.concepts.forEach(function(result) {
           predictionResults.push(result.name);
         });
+        callback();
       }
     }
 
-    function getResultsLength() {
+    ext.getResultsLength = function () {
       return predictionResults.length;
     }
 
-    function getItemFromResults(index) {
+    ext.getItemFromResults = function (index) {
       if(index >= 0 && index < predictionResults.length) {
         return predictionResults[index];
       } else {
@@ -137,7 +143,7 @@
       }
     }
 
-    function clearResults() {
+    ext.clearResults = function () {
       predictionResults = [];
     }
 
