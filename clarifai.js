@@ -169,7 +169,7 @@
     var descriptor = {
         blocks: [
           ['w', 'Connect to API: %s %s', 'initializeClarifai', 'vKCXoGNBI9RrFYs33BUxcDOB3WoMJ5rK9D0hSD4J', 'cva5xoSvMf_htwZZHIZ_9JhjThL8N0BX_PqaJPUj'],
-          ['w', 'Search image %s', 'performSearch', ''],
+          ['w', 'Search image %s', 'performSearch', 'https://exoticcars.enterprise.com/etc/designs/exotics/clientlibs/dist/img/homepage/Homepage-Hero-Car.png'],
           ['r', 'Image results count', 'getResultsLength'],
           ['r', 'Get result %n from results', 'getItemFromResults'],
           ['r', 'Clear results', 'clearResults']
