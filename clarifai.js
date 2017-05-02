@@ -79,7 +79,7 @@
         return imageDataURL;
     }
 
-    ext.initializeClarifai = function (apikey1, apikey2) {
+    ext.initializeClarifai = function (apikey1, apikey2, callback) {
       var clarifai = new Clarifai.App(apikey1, apikey2);
       if (clarifai == undefined) {
         clarifaiLoaded = false;
@@ -87,7 +87,8 @@
         clarifaiLoaded = true;
         initializeCamera();
       }
-      console.log("Clarifai initialized")
+      console.log("Clarifai initialized");
+      callback();
     }
 
     function performSearch(image, callback) {
@@ -162,7 +163,7 @@
     var descriptor = {
         blocks: [
           ['w', 'Connect to API: %s %s', 'initializeClarifai', 'vKCXoGNBI9RrFYs33BUxcDOB3WoMJ5rK9D0hSD4J', 'cva5xoSvMf_htwZZHIZ_9JhjThL8N0BX_PqaJPUj'],
-          ['W', 'Search image %s', 'performSearch'],
+          ['w', 'Search image %s', 'performSearch', ''],
           ['r', 'Image results count', 'getResultsLength'],
           ['r', 'Get result %n from results', 'getItemFromResults'],
           ['r', 'Clear results', 'clearResults']
