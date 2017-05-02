@@ -80,12 +80,9 @@
     }
 
     ext.performSearch = function(image, callback) {
-      console.log(image);
-      console.log(image.length);
-      console.log(imageCanvas);
-      if(image == '') {
+      if(image.length == 0) {
         console.log("if image is empty");
-        if(imageCanvas != undefined) {
+        if(hidden_canvas != undefined) {
           console.log("if canvas is defined")
           var snapshot = takeSnapshot();
           var base64v = snapshot.substring(snapshot.indexOf(',')+1);
