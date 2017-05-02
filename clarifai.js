@@ -56,9 +56,6 @@
 
     function takeSnapshot(){
 
-        var hidden_canvas = document.querySelector('#imageCanvas'),
-        video = document.querySelector('#camera_stream');
-
         // Get the exact size of the video element.
         width = video.videoWidth,
         height = video.videoHeight,
@@ -92,44 +89,46 @@
     }
 
     ext.performSearch = function(image, callback) {
-      console.log(image);
-      if(image == undefined) {
-        if(imageCanvas != undefined) {
-          image = takeSnapshot();
-        } else callback();
-      } else {
-        if (image.substring(0,4) != "http") {
-          image = { base64 : image };
-        }
-      }
-      if(clarifaiLoaded == false) {
-        console.log("Clarifai not loaded");
-        callback();
-        return;
-      }
-      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
-        function(response) {
-          console.log(response);
-          if(response.status.code == 10000) {
-            processResponse(response);
-          } else {
-            console.log(response);
-            callback();
-          }
-        },
-        function(err) {
-          console.error(err);
-          callback();
-        }
-      );
-
-      function processResponse(response) {
-        console.log("Processing response", response);
-        response.outputs[0].data.concepts.forEach(function(result) {
-          predictionResults.push(result.name);
-        });
-        callback();
-      }
+      console.log(takeSnapshot());
+      callback();
+      // console.log(image);
+      // if(image == undefined) {
+      //   if(imageCanvas != undefined) {
+      //     image = takeSnapshot();
+      //   } else callback();
+      // } else {
+      //   if (image.substring(0,4) != "http") {
+      //     image = { base64 : image };
+      //   }
+      // }
+      // if(clarifaiLoaded == false) {
+      //   console.log("Clarifai not loaded");
+      //   callback();
+      //   return;
+      // }
+      // clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+      //   function(response) {
+      //     console.log(response);
+      //     if(response.status.code == 10000) {
+      //       processResponse(response);
+      //     } else {
+      //       console.log(response);
+      //       callback();
+      //     }
+      //   },
+      //   function(err) {
+      //     console.error(err);
+      //     callback();
+      //   }
+      // );
+      //
+      // function processResponse(response) {
+      //   console.log("Processing response", response);
+      //   response.outputs[0].data.concepts.forEach(function(result) {
+      //     predictionResults.push(result.name);
+      //   });
+      //   callback();
+      // }
     }
 
     ext.getResultsLength = function () {
