@@ -81,21 +81,15 @@
 
     ext.performSearch = function(image, callback) {
       if(image.length == 0) {
-        console.log("if image is empty");
         if(hidden_canvas != undefined) {
-          console.log("if canvas is defined")
           var snapshot = takeSnapshot();
           var base64v = snapshot.substring(snapshot.indexOf(',')+1);
-          console.log(base64v);
           image = { base64 : base64v };
         } else callback();
       } else {
-        console.log("if image is not empty")
         if (image.substring(0,4) != "http") {
-          console.log("if image is base64")
           var startIndex = image.indexOf(',')+1;
           base64v = snapshot.substring(startIndex);
-          console.log(base64v);
           image = { base64 : base64v };
         }
       }
@@ -104,7 +98,17 @@
         callback();
         return;
       }
-      console.log(image);
+
+      function processResponse(response) {
+        if(predictionResults.length != 0) {
+          predictionResults = [];
+        }
+        response.outputs[0].data.concepts.forEach(function(result) {
+          predictionResults.push(result.name);
+        });
+        callback();
+      }
+
       clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
         function(response) {
           console.log(response);
@@ -120,14 +124,6 @@
           callback();
         }
       );
-
-      function processResponse(response) {
-        console.log("Processing response", response);
-        response.outputs[0].data.concepts.forEach(function(result) {
-          predictionResults.push(result.name);
-        });
-        callback();
-      }
     }
 
     ext.getResultsLength = function () {
