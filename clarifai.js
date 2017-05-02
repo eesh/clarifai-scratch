@@ -100,6 +100,7 @@
         callback();
         return;
       }
+      console.log(image);
       clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
         function(response) {
           console.log(response);
