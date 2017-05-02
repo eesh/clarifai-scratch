@@ -80,15 +80,22 @@
     }
 
     ext.performSearch = function(image, callback) {
+      console.log(image);
+      console.log(image.length);
+      console.log(imageCanvas);
       if(image == '') {
+        console.log("if image is empty");
         if(imageCanvas != undefined) {
+          console.log("if canvas is defined")
           var snapshot = takeSnapshot();
           var base64v = snapshot.substring(snapshot.indexOf(',')+1);
           console.log(base64v);
           image = { base64 : base64v };
         } else callback();
       } else {
+        console.log("if image is not empty")
         if (image.substring(0,4) != "http") {
+          console.log("if image is base64")
           var startIndex = image.indexOf(',')+1;
           base64v = snapshot.substring(startIndex);
           console.log(base64v);
