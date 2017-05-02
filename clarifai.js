@@ -58,8 +58,8 @@
 
         console.log("take snapshot routine");
         // Get the exact size of the video element.
-        width = video.videoWidth;
-        height = video.videoHeight;
+        width = videoElement.videoWidth;
+        height = videoElement.videoHeight;
         console.log("wxh",width, height);
         // Context object for working with the canvas.
         context = hidden_canvas.getContext('2d');
@@ -73,7 +73,7 @@
         console.log("canvas dims set");
 
         // Draw a copy of the current frame from the video on the canvas.
-        context.drawImage(video, 0, 0, width, height);
+        context.drawImage(videoElement, 0, 0, width, height);
         console.log("image drawn");
 
         // Get an image dataURL from the canvas.
