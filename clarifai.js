@@ -80,45 +80,48 @@
     }
 
     ext.performSearch = function(image, callback) {
-      console.log(image);
-      if(image == undefined) {
-        if(imageCanvas != undefined) {
-          image = { base64 : takeSnapshot() };
-          console.log(image);
-        } else callback();
-      } else {
-        if (image.substring(0,4) != "http") {
-          image = { base64 : image };
-        }
-      }
-      if(clarifaiLoaded == false) {
-        console.log("Clarifai not loaded");
-        callback();
-        return;
-      }
-      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
-        function(response) {
-          console.log(response);
-          if(response.status.code == 10000) {
-            processResponse(response);
-          } else {
-            console.log(response);
-            callback();
-          }
-        },
-        function(err) {
-          console.error(err);
-          callback();
-        }
-      );
-
-      function processResponse(response) {
-        console.log("Processing response", response);
-        response.outputs[0].data.concepts.forEach(function(result) {
-          predictionResults.push(result.name);
-        });
-        callback();
-      }
+      console.log("Taking snap");
+      console.log(takeSnapshot());
+      console.log("post snap");
+      callback();
+      // console.log(image);
+      // if(image == undefined) {
+      //   if(imageCanvas != undefined) {
+      //     image = takeSnapshot();
+      //   } else callback();
+      // } else {
+      //   if (image.substring(0,4) != "http") {
+      //     image = { base64 : image };
+      //   }
+      // }
+      // if(clarifaiLoaded == false) {
+      //   console.log("Clarifai not loaded");
+      //   callback();
+      //   return;
+      // }
+      // clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+      //   function(response) {
+      //     console.log(response);
+      //     if(response.status.code == 10000) {
+      //       processResponse(response);
+      //     } else {
+      //       console.log(response);
+      //       callback();
+      //     }
+      //   },
+      //   function(err) {
+      //     console.error(err);
+      //     callback();
+      //   }
+      // );
+      //
+      // function processResponse(response) {
+      //   console.log("Processing response", response);
+      //   response.outputs[0].data.concepts.forEach(function(result) {
+      //     predictionResults.push(result.name);
+      //   });
+      //   callback();
+      // }
     }
 
     ext.getResultsLength = function () {
