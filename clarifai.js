@@ -83,7 +83,8 @@
       console.log(image);
       if(image == undefined) {
         if(imageCanvas != undefined) {
-          image = takeSnapshot();
+          image = { base64 : takeSnapshot() };
+          console.log(image);
         } else callback();
       } else {
         if (image.substring(0,4) != "http") {
