@@ -80,7 +80,7 @@
     }
 
     ext.performSearch = function(image, callback) {
-      if(image == undefined) {
+      if(image == '') {
         if(imageCanvas != undefined) {
           var snapshot = takeSnapshot();
           var base64v = snapshot.substring(snapshot.indexOf(',')+1);
