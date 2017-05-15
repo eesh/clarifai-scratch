@@ -6,6 +6,9 @@ layout: default
 ---
 
 <h1>Setup</h1>
+
+![Clarifai setup]({{site.url}}{{site.baseurl}}/assets/images/clarifai-setup.gif)
+
 * Go to [Clarifai's website](https://clarifai.com/) and get a free API key.
 
 * Go to [ScratchX](scratchx.org/#scratch) and hit the **Load experimental extension** button.
@@ -13,6 +16,8 @@ layout: default
 * Use the following URL to load the extension via URL.
 
 * Put the API keys in the  **Connect to API block** and execute the block to initialize the Clarifai API.
+
+
 
 <h1>Usage</h1>
 
