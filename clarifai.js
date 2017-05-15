@@ -126,6 +126,140 @@
       );
     }
 
+    ext.performLinkSearch = function(image, callback) {
+      if(image.length == 0) {
+        callback();
+        return;
+      } else {
+        if (image.substring(0,4) != "http") {
+          callback();
+          return;
+        }
+      }
+      if(clarifaiLoaded == false) {
+        console.log("Clarifai not loaded");
+        callback();
+        return;
+      }
+
+      function processResponse(response) {
+        if(predictionResults.length != 0) {
+          predictionResults = [];
+        }
+        response.outputs[0].data.concepts.forEach(function(result) {
+          predictionResults.push(result.name);
+        });
+        callback();
+      }
+
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+        function(response) {
+          console.log(response);
+          if(response.status.code == 10000) {
+            processResponse(response);
+          } else {
+            console.log(response);
+            callback();
+          }
+        },
+        function(err) {
+          console.error(err);
+          callback();
+        }
+      );
+    }
+
+    ext.performDataSearch = function(image, callback) {
+      if(image.length == 0) {
+        callback();
+        return;
+      } else {
+        if (image.substring(0,4) == "http") {
+          callback();
+          return;
+        }
+        var startIndex = image.indexOf(',')+1;
+        base64v = snapshot.substring(startIndex);
+        image = { base64 : base64v };
+        if(image.length == 0) {
+          callback();
+          return;
+        }
+      }
+
+      if(clarifaiLoaded == false) {
+        console.log("Clarifai not loaded");
+        callback();
+        return;
+      }
+
+      function processResponse(response) {
+        if(predictionResults.length != 0) {
+          predictionResults = [];
+        }
+        response.outputs[0].data.concepts.forEach(function(result) {
+          predictionResults.push(result.name);
+        });
+        callback();
+      }
+
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+        function(response) {
+          console.log(response);
+          if(response.status.code == 10000) {
+            processResponse(response);
+          } else {
+            console.log(response);
+            callback();
+          }
+        },
+        function(err) {
+          console.error(err);
+          callback();
+        }
+      );
+    }
+
+    ext.performCameraSearch = function(callback) {
+      if(hidden_canvas != undefined) {
+        var snapshot = takeSnapshot();
+        var base64v = snapshot.substring(snapshot.indexOf(',')+1);
+        image = { base64 : base64v };
+      } else callback();
+
+      if(clarifaiLoaded == false) {
+        console.log("Clarifai not loaded");
+        callback();
+        return;
+      }
+
+      function processResponse(response) {
+        if(predictionResults.length != 0) {
+          predictionResults = [];
+        }
+        response.outputs[0].data.concepts.forEach(function(result) {
+          predictionResults.push(result.name);
+        });
+        callback();
+      }
+
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, image).then(
+        function(response) {
+          console.log(response);
+          if(response.status.code == 10000) {
+            processResponse(response);
+          } else {
+            console.log(response);
+            callback();
+          }
+        },
+        function(err) {
+          console.error(err);
+          callback();
+        }
+      );
+    }
+
     ext.getResultsLength = function () {
       return predictionResults.length;
     }
@@ -164,7 +298,9 @@
     var descriptor = {
         blocks: [
           ['w', 'Connect to API: %s %s', 'initializeClarifai', 'vKCXoGNBI9RrFYs33BUxcDOB3WoMJ5rK9D0hSD4J', 'cva5xoSvMf_htwZZHIZ_9JhjThL8N0BX_PqaJPUj'],
-          ['w', 'Search image %s', 'performSearch', 'https://exoticcars.enterprise.com/etc/designs/exotics/clientlibs/dist/img/homepage/Homepage-Hero-Car.png'],
+          ['w', 'Search image using link %s', 'performLinkSearch',],
+          ['w', 'Search image using DataURI %s', 'performDataSearch'],
+          ['w', 'Search image using camera', 'performCameraSearch'],
           ['r', 'Image results count', 'getResultsLength'],
           ['r', 'Get result %n from results', 'getItemFromResults'],
           ['r', 'Clear results', 'clearResults']
