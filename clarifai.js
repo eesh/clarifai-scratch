@@ -302,7 +302,7 @@
           ['w', 'Search image using DataURI %s', 'performDataSearch'],
           ['w', 'Search image using camera', 'performCameraSearch'],
           ['r', 'Image results count', 'getResultsLength'],
-          ['r', 'Get result %n from results', 'getItemFromResults'],
+          ['r', 'Get result %n from results', 'getItemFromResults', 0],
           ['r', 'Clear results', 'clearResults']
         ]
     };
