@@ -21,13 +21,9 @@ layout: default
 
 <h1>Usage</h1>
 
-* <h3>To search using base64 image data</h3>
-
-  * Place the **Search image using DataURI** block in the Scratch script.
-
-  * Paste the base64 image data in the input area of the block.
-
 * <h3>To search using image URL</h3>
+
+  ![Search with URL]({{site.url}}{{site.baseurl}}/assets/images/clarifai-ex-1.gif)
 
   * Place the **Search image using link** block in the Scratch script.
 
@@ -42,17 +38,26 @@ layout: default
   * Note: Camera can only be accessed when on secure https domains. If you want to test the feature camera feature on ScratchX, you can start Chrome in insecure mode
     which will allow you to access the camera on Scratch.
 
-    * If you are on macOS, use the following command in terminal to open Chrome in insecure mode:
+    * If you are on macOS, use the following command in **terminal** to open Chrome in insecure mode:
       ```bash
       open -a "Google Chrome" --args --unsafely-treat-insecure-origin-as-secure="http://scratchx.org/" --user-data-dir
       ```
+      ![Terminal]({{site.url}}{{site.baseurl}}/assets/images/terminal.png)
 
     * Untested: If you are on windows, use the following command in command prompt:
     ```bash
     chrome.exe --unsafely-treat-insecure-origin-as-secure="http://scratchx.org/" --user-data-dir
     ```
 
+* <h3>To search using base64 image data</h3>
+
+  * Place the **Search image using DataURI** block in the Scratch script.
+
+  * Paste the base64 image data in the input area of the block.
+
 * <h3>Using results</h3>
+
+  ![Results example]({{site.url}}{{site.baseurl}}/assets/images/results-example.png)
 
   * <h4>To get the count of results</h4>
 
