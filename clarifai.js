@@ -179,7 +179,7 @@
           return;
         }
         var startIndex = image.indexOf(',')+1;
-        base64v = snapshot.substring(startIndex);
+        var base64v = image.substring(startIndex);
         image = { base64 : base64v };
         if(image.length == 0) {
           callback();
@@ -209,7 +209,6 @@
           if(response.status.code == 10000) {
             processResponse(response);
           } else {
-            console.log(response);
             callback();
           }
         },
@@ -249,7 +248,6 @@
           if(response.status.code == 10000) {
             processResponse(response);
           } else {
-            console.log(response);
             callback();
           }
         },
