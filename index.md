@@ -9,7 +9,7 @@ layout: default
 
 * <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_link.sbx#scratch">Search using link</a></h3>
 
-* <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_data_search.sbx#scratch">Search using dataURI</a></h3>
+* <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_data.sbx#scratch">Search using dataURI</a></h3>
 
 * <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_camera_search.sbx#scratch">Search using camera</a></h3>
 
