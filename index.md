@@ -11,7 +11,7 @@ layout: default
 
 * <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_data.sbx#scratch">Search using dataURI</a></h3>
 
-* <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_camera_search.sbx#scratch">Search using camera</a></h3>
+* <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_camera.sbx#scratch">Search using camera</a></h3>
 
 
 <h1>Setup</h1>
