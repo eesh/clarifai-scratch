@@ -7,7 +7,7 @@ layout: default
 
 <h1>Examples</h1>
 
-* <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_link_search.sbx#scratch">Search using link</a></h3>
+* <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_link.sbx#scratch">Search using link</a></h3>
 
 * <h3><a href="http://scratchx.org/?url=https://eesh.github.io/clarifai-scratch/examples/clarifai_data_search.sbx#scratch">Search using dataURI</a></h3>
 
